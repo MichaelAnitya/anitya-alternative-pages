@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rec Room Alternative: anitya. Build 3D Worlds in Your Browser, Free</title>
+<meta name="description" content="Rec Room closed on June 1, 2026. anitya gives its builders and players a new home: 3D worlds you create with words, share with a link, and play in the browser. Free to start.">
+<link rel="canonical" href="https://anitya.space/alternatives/rec-room">
+<meta property="og:title" content="Looking for a Rec Room alternative?">
+<meta property="og:description" content="Rec Room closed its doors. anitya is a new home for its builders and players: 3D worlds in the browser, from one link, free to start.">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Rec Room really shutting down?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Rec Room announced its closure and shut down on June 1, 2026, after a decade and more than 150 million players. Logins ended, rec.net went offline, and the creator build servers closed." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is anitya free to use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, anitya is free to start. You can step into a World from a link in your browser without an account. Creating and publishing your own Worlds takes a free account." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a VR headset to use anitya?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. anitya runs in the browser first. The same World link opens on desktop, phone, and VR, with nothing to install." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I bring my Rec Room creations to anitya?",
+      "acceptedAnswer": { "@type": "Answer", "text": "There is no direct import from Rec Room. What you can do is rebuild: describe your room in words and watch anitya build it, refine it by drag and drop, and import your own 3D models, for example from Blender." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is anitya ready to use today?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. anitya is live now in open beta and improving weekly. The beta tag means what it says: rough edges, actively being fixed. There is no relaunch to wait for. You can step into Worlds and build today, and arriving now means you are one of the first ones in." }
+    }
+  ]
+}
+</script>
+<style>
+  /* ===== anitya brand kit (extracted from the live site) ===== */
+  @font-face { font-family:"Realce Black"; src:url("fonts/realce-black.woff2") format("woff2"); font-weight:100 900; font-display:swap; }
+  @font-face { font-family:"Codec Pro"; src:url("fonts/codec-pro-light.woff2") format("woff2"); font-weight:100 500; font-display:swap; }
+  @font-face { font-family:"Codec Pro"; src:url("fonts/codec-pro-bold.woff2") format("woff2"); font-weight:600 900; font-display:swap; }
+  :root{
+    --near-black:#1d2129; --mid-gray:#8f8e93; --light-gray:#e7e7e7;
+    --green:#52ece1; --pink:#f29de1; --orange:#fa813a; --yellow:#fbe95f;
+    --ink:#0c0f14;
+    --title:"Realce Black","Poppins","Arial Black",Impact,sans-serif;
+    --body:"Codec Pro","Inter","Helvetica Neue",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(52vw 46vw at 10% -8%, rgba(82,236,225,0.13), transparent 60%),
+      radial-gradient(36vw 34vw at 104% 4%, rgba(242,157,225,0.07), transparent 60%),
+      radial-gradient(40vw 36vw at 58% 116%, rgba(251,233,95,0.05), transparent 62%),
+      #14161b;
+    color:var(--light-gray); font-family:var(--body); font-weight:300;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  header{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
+  header img{height:26px;width:auto;display:block}
+  .btn{display:inline-block;border-radius:999px;font-weight:600;cursor:pointer;text-decoration:none;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, color .18s ease}
+  .btn-primary{background:var(--green);color:var(--ink);padding:15px 38px;font-size:1.05rem;
+    box-shadow:0 4px 30px rgba(82,236,225,0.4)}
+  .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 44px rgba(82,236,225,0.55)}
+  .btn-ghost{padding:11px 22px;border:1px solid rgba(231,231,231,0.25);font-size:.92rem;color:var(--light-gray)}
+  .btn-ghost:hover{border-color:var(--green);color:var(--green)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:44px 0 70px}
+  .eyebrow{font-weight:700;font-size:.72rem;letter-spacing:2.5px;color:var(--green);text-transform:uppercase;margin-bottom:16px}
+  h1{font-family:var(--title);font-weight:900;color:#fff;line-height:.95;font-size:clamp(2.6rem,5.4vw,4.1rem)}
+  h1 .alt{color:var(--green)}
+  .lede{margin-top:22px;font-size:1.05rem;line-height:1.65;color:var(--light-gray);max-width:520px}
+  .lede b{font-weight:700;color:#fff}
+  .cta-row{display:flex;gap:14px;align-items:center;margin-top:28px;flex-wrap:wrap}
+  .under-cta{margin-top:14px;font-size:.85rem;color:var(--mid-gray)}
+
+  .hero-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:28px;overflow:hidden;
+    background:var(--near-black);border:4px solid var(--green);
+    box-shadow:0 0 80px 14px rgba(82,236,225,0.35),0 0 220px 60px rgba(82,236,225,0.16),0 0 160px 30px rgba(242,157,225,0.12)}
+  .hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero-media .scrim{position:absolute;inset:0;background:linear-gradient(to top, rgba(10,12,16,0.45), transparent 35%)}
+  .hero-media .live{position:absolute;left:18px;bottom:16px;display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:500;color:#fff}
+  .hero-media .live .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  /* sections */
+  section{padding:34px 0}
+  h2{font-family:var(--title);font-weight:900;color:#fff;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.02}
+  h2 .alt{color:var(--green)}
+  .sec-sub{margin-top:10px;color:var(--mid-gray);font-size:1rem;max-width:640px;line-height:1.55}
+
+  /* comparison table */
+  .compare{margin-top:28px;border:1px solid rgba(231,231,231,0.1);border-radius:20px;overflow:hidden}
+  .row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(231,231,231,0.08)}
+  .row:first-child{border-top:none}
+  .row.head{background:rgba(29,33,41,0.9)}
+  .row.head .cell{font-weight:700;color:#fff;font-size:.95rem}
+  .cell{padding:18px 22px;font-size:.94rem;line-height:1.5}
+  .cell.left{background:rgba(20,22,27,0.55);color:var(--mid-gray)}
+  .cell.right{background:rgba(82,236,225,0.05);color:var(--light-gray)}
+  .cell b{color:#fff;font-weight:700}
+  .row.honest .cell.right{background:rgba(251,233,95,0.06)}
+  .row.honest .cell.right b{color:var(--yellow)}
+
+  /* trust section */
+  .trust{margin-top:26px;display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
+  .trust-card{background:rgba(29,33,41,0.85);border:1px solid rgba(231,231,231,0.08);border-radius:20px;padding:28px 30px}
+  .trust-card.godot{border-color:rgba(82,236,225,0.45)}
+  .trust-card h3{font-family:var(--body);font-weight:700;color:#fff;font-size:1.1rem;margin-bottom:12px}
+  .trust-card p{font-size:.95rem;line-height:1.65;color:var(--light-gray)}
+  .trust-card p + p{margin-top:12px}
+  .trust-card .muted{color:var(--mid-gray)}
+
+  /* worlds row (mid-page CTA: zero commitment proof) */
+  .worlds-head{text-align:center;margin-top:10px}
+  .worlds-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+  @media (max-width:880px){.worlds-grid{grid-template-columns:repeat(2,1fr)}}
+  .wcard{
+    display:block;position:relative;border-radius:16px;overflow:hidden;text-decoration:none;
+    border:1.5px solid rgba(231,231,231,0.1);background:var(--near-black);
+    transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+  }
+  .wcard:hover{transform:translateY(-4px);border-color:rgba(82,236,225,0.6);box-shadow:0 12px 40px rgba(82,236,225,0.18)}
+  .wcard img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+  .wcard .wname{
+    position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;
+    background:linear-gradient(to top, rgba(10,12,16,0.85), transparent);
+    color:#fff;font-weight:700;font-size:.92rem;
+  }
+  .wcard .enter{
+    position:absolute;top:10px;right:10px;background:var(--green);color:var(--ink);
+    font-size:.7rem;font-weight:700;letter-spacing:.5px;padding:5px 10px;border-radius:999px;
+    opacity:0;transition:opacity .16s ease;
+  }
+  .wcard:hover .enter{opacity:1}
+  .worlds-cta{text-align:center;margin-top:26px}
+  .worlds-note{margin-top:12px;font-size:.85rem;color:var(--mid-gray);text-align:center}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  .step{background:rgba(29,33,41,0.85);border:1px solid rgba(231,231,231,0.08);border-radius:18px;padding:24px}
+  .step .n{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:10px;
+    font-weight:700;color:var(--ink);background:var(--green);margin-bottom:14px}
+  .step:nth-child(2) .n{background:var(--yellow)}
+  .step:nth-child(3) .n{background:var(--pink)}
+  .step b{display:block;color:#fff;font-weight:700;font-size:1.02rem;margin-bottom:6px}
+  .step span{font-size:.9rem;color:var(--mid-gray);line-height:1.5}
+
+  /* FAQ */
+  .faq{margin-top:26px;display:flex;flex-direction:column;gap:12px}
+  .qa{background:rgba(29,33,41,0.85);border:1px solid rgba(231,231,231,0.08);border-radius:16px;padding:20px 24px}
+  .qa b{display:block;color:#fff;font-weight:700;font-size:1rem;margin-bottom:8px}
+  .qa p{font-size:.93rem;color:var(--light-gray);line-height:1.6}
+
+  /* closing */
+  .closing{text-align:center;padding:56px 0 30px}
+  .closing h2{font-size:clamp(1.8rem,4vw,2.6rem)}
+  .closing p{margin-top:14px;color:var(--mid-gray)}
+  .closing .btn-primary{margin-top:26px}
+
+  footer{padding:34px 0 44px;text-align:center;font-size:.85rem;color:var(--mid-gray)}
+  footer a{color:var(--mid-gray)}
+  footer a:hover{color:var(--green)}
+  .coming{margin-top:8px;font-size:.8rem}
+
+  @media (max-width:880px){
+    .hero{grid-template-columns:1fr;gap:36px;padding-top:24px}
+    .trust{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .row{grid-template-columns:1fr}
+    .cell.left{border-bottom:1px dashed rgba(231,231,231,0.1)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img src="assets/anitya_logo_white.png" alt="anitya">
+    <a class="btn btn-ghost" href="https://app.anitya.space/?utm_source=landing&utm_medium=seo&utm_campaign=rec-room-alternative&utm_content=header">Open anitya</a>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div>
+      <div class="eyebrow">For Rec Room players and builders</div>
+      <h1>Looking for a<br><span class="alt">Rec Room</span> alternative?</h1>
+      <p class="lede">
+        Rec Room shut down on June 1, 2026. A decade, <b>150 million players</b>, and then the
+        servers went quiet. If you spent years building and hanging out in there, that stings.
+        But here is the thing: the magic was never the app. <b>It was you, making places.</b>
+        And that part did not shut down.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://app.anitya.space/?utm_source=landing&utm_medium=seo&utm_campaign=rec-room-alternative&utm_content=hero">Start building free</a>
+        <a class="btn btn-ghost" href="#compare">See how it compares</a>
+      </div>
+      <p class="under-cta">Runs in your browser. Nothing to install. Play from a link, no account needed.</p>
+    </div>
+    <div class="hero-media">
+      <video autoplay muted loop playsinline poster="">
+        <source src="assets/feed-demo.mp4" type="video/mp4">
+      </video>
+      <div class="scrim"></div>
+      <div class="live"><span class="dot"></span> real footage, the anitya world feed</div>
+    </div>
+  </section>
+
+  <!-- ============ COMPARISON ============ -->
+  <section id="compare">
+    <h2>What you had. <span class="alt">What it becomes.</span></h2>
+    <p class="sec-sub">Not a feature checklist written by marketing. An honest map from the things Rec Room did well to how they work in anitya.</p>
+
+    <div class="compare">
+      <div class="row head">
+        <div class="cell left">In Rec Room</div>
+        <div class="cell right">In anitya</div>
+      </div>
+      <div class="row">
+        <div class="cell left">Building rooms with the Maker Pen, then Rec Room Studio for the ambitious.</div>
+        <div class="cell right"><b>Describe your world in words and watch it appear</b>, then refine it with drag and drop. No code, no separate studio app.</div>
+      </div>
+      <div class="row">
+        <div class="cell left">Inviting friends into your room inside the app.</div>
+        <div class="cell right"><b>Every World is a link.</b> Anyone can step inside from the browser, and visitors do not need an account.</div>
+      </div>
+      <div class="row">
+        <div class="cell left">Apps for Quest, PlayStation, phone, each with installs and updates.</div>
+        <div class="cell right"><b>One link opens everywhere</b>: desktop, phone, and VR, straight from the browser. Nothing to install.</div>
+      </div>
+      <div class="row">
+        <div class="cell left">Custom models required the Studio pipeline.</div>
+        <div class="cell right"><b>Import your own 3D models</b> (Blender works out of the box) and build with a growing asset library.</div>
+      </div>
+      <div class="row honest">
+        <div class="cell left">A decade of polish: full quest games, scripted experiences, deep systems.</div>
+        <div class="cell right"><b>Where Rec Room was ahead:</b> anitya is younger. Interactions and game systems are growing every week, but Rec Room had ten years. We would rather tell you that straight than oversell you twice.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE QUESTION ============ -->
+  <section>
+    <h2>The question you are actually asking:<br><span class="alt">will this one last?</span></h2>
+    <div class="trust">
+      <div class="trust-card godot">
+        <h3>You have every right to ask.</h3>
+        <p>Rec Room raised over 294 million dollars, reached 150 million players, and still could not make the costs work. AltspaceVR closed in 2023. Mozilla walked away from Hubs in 2024. If you have been burned before, skepticism is the sane response.</p>
+        <p>So we will not insult you with a promise that nothing can ever change. Here is what we can tell you instead: <b style="color:#fff">anitya is built by the team behind Godot</b>, the open source engine that has outlived nearly every platform on this page and only grown stronger for over a decade. Same people. Same philosophy: creation should not depend on one company's runway.</p>
+      </div>
+      <div class="trust-card">
+        <h3>Built browser first, on purpose</h3>
+        <p class="muted">Heavy native apps on every platform are part of what made social 3D so expensive to run. anitya lives in the browser: lighter to serve, instant to join, and the same link works on the devices you already own.</p>
+        <p class="muted">You will be early here. Early means rough edges sometimes, and it also means the people who arrive now shape what this becomes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORLDS ROW (mid-page CTA: step inside, zero commitment) ============ -->
+  <section>
+    <div class="worlds-head">
+      <h2>Don't take our word for it.<br><span class="alt">Step inside.</span></h2>
+      <p class="sec-sub" style="margin-left:auto;margin-right:auto">Real Worlds from early builders. Click one and you are in it, from your browser, in seconds. No account, no download, nobody watching over your shoulder.</p>
+    </div>
+    <!-- TODO: swap each href for the World's real share URL (anitya.space/w/slug) -->
+    <div class="worlds-grid">
+      <a class="wcard" href="https://app.anitya.space/feed?world=NzI5Ng==&jump=1&utm_source=landing&utm_medium=seo&utm_campaign=rec-room-alternative&utm_content=world-invasion">
+        <img src="assets/world_invasion.jpg" alt="Invasion, a World built on anitya" loading="lazy">
+        <span class="enter">ENTER</span>
+        <span class="wname">Invasion</span>
+      </a>
+      <a class="wcard" href="https://app.anitya.space/feed?world=NzMwMQ==&jump=1&utm_source=landing&utm_medium=seo&utm_campaign=rec-room-alternative&utm_content=world-qanara">
+        <img src="assets/world_qanara.jpg" alt="Qanara, a desert city World built on anitya" loading="lazy">
+        <span class="enter">ENTER</span>
+        <span class="wname">Qanara</span>
+      </a>
+      <a class="wcard" href="https://app.anitya.space/feed?world=NzM2NQ==&jump=1&utm_source=landing&utm_medium=seo&utm_campaign=rec-room-alternative&utm_content=world-barbarossa-cove">
+        <img src="assets/world_barbarossa_cove.jpg" alt="Barbarossa Cove, a World built on anitya" loading="lazy">
+        <span class="enter">ENTER</span>
+        <span class="wname">Barbarossa Cove</span>
+      </a>
+      <a class="wcard" href="https://app.anitya.space/feed?world=NzMxOA==&jump=1&utm_source=landing&utm_medium=seo&utm_campaign=rec-room-alternative&utm_content=world-tropical-island">
+        <img src="assets/world_tropical_island.jpg" alt="Tropical Island, a World built on anitya" loading="lazy">
+        <span class="enter">ENTER</span>
+        <span class="wname">Tropical Island</span>
+      </a>
+    </div>
+    <div class="worlds-cta">
+      <a class="btn btn-primary" href="https://app.anitya.space/?utm_source=landing&utm_medium=seo&utm_campaign=rec-room-alternative&utm_content=midpage">Start building your own</a>
+      <p class="worlds-note">You need a free account to build. You can step inside without one.</p>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section>
+    <h2>From nothing to a shared world <span class="alt">in minutes</span></h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><b>Prompt it</b><span>Type what you imagine, a hangout, an arena, a rooftop at sunset, and watch anitya build it in front of you.</span></div>
+      <div class="step"><span class="n">2</span><b>Refine it</b><span>If it needs a touch, drag, drop, move, and place. Import your own models if you have them.</span></div>
+      <div class="step"><span class="n">3</span><b>Publish it</b><span>Your World goes live in the feed, where people scroll and step inside, and gets a link you can send anywhere. You need a free account to publish. Your visitors never need one.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section>
+    <h2>Quick answers</h2>
+    <div class="faq">
+      <div class="qa"><b>Is Rec Room really shutting down?</b><p>Yes. Rec Room closed on June 1, 2026, after a decade and more than 150 million players. Logins ended, rec.net went offline, and the creator build servers closed.</p></div>
+      <div class="qa"><b>Is anitya free?</b><p>Free to start. You can step into Worlds from a link without an account. Creating and publishing your own takes a free account.</p></div>
+      <div class="qa"><b>Do I need a VR headset?</b><p>No. anitya is browser first. The same World link opens on desktop, phone, and VR.</p></div>
+      <div class="qa"><b>Can I bring my Rec Room creations over?</b><p>There is no direct import from Rec Room, and we will not pretend otherwise. What you can do is rebuild fast: describe your room in words, refine it by hand, and import your own 3D models, for example from Blender.</p></div>
+      <div class="qa"><b>Is anitya ready to use today?</b><p>Yes. anitya is live now in open beta and improving weekly. The beta tag means what it says: rough edges, actively being fixed. There is no relaunch to wait for. You can step into Worlds and build today, and arriving now means you are one of the first ones in.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="closing">
+    <h2>You built once.<br><span class="alt">Build again.</span></h2>
+    <p>Your next world takes minutes to start, and it is one link away from your people.</p>
+    <a class="btn btn-primary" href="https://app.anitya.space/?utm_source=landing&utm_medium=seo&utm_campaign=rec-room-alternative&utm_content=closing">Start building free</a>
+    <p class="under-cta">No download. No headset required. Free to start.</p>
+  </section>
+
+  <footer>
+    <div>anitya.space &nbsp;·&nbsp; build and publish 3D worlds on the web &nbsp;·&nbsp; <a href="https://anitya.space/terms.html">Terms</a> &nbsp;·&nbsp; <a href="https://anitya.space/privacy.html">Privacy</a></div>
+    <div class="coming">Coming from <a href="spatial.html">Spatial</a> or <a href="mozilla-hubs.html">Mozilla Hubs</a>? We have guides for you too. &nbsp;·&nbsp; Builders hang out on our <a href="https://discord.gg/anitya">Discord</a>.</div>
+  </footer>
+
+</div>
+</body>
+</html>
